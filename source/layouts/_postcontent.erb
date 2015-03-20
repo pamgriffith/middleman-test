@@ -1,0 +1,28 @@
+<article class="post">
+
+  <header class="entry-header">
+    <h1 class="entry-title">
+        <% if single == true %>
+        <%= post.title %>
+        <% else %>
+        <%= link_to post.title, post %>
+        <% end %>
+    </h1>
+    <time class="entry-date" datetime="<%= post.date.strftime('%F') %>"><%= post.date.strftime('%B %-d, %Y') %></time>
+  </header>
+
+  <div class="entry-content">
+    <%= post.body %>
+  </div>
+
+  <footer class="entry-meta">
+    <% if post.data.category && post.tags.length > 0 %>
+      Posted in <%= link_to post.data.category, category_path(post.data.category) %> and tagged <%= partial("layouts/taglist", :locals => { :tags => post.tags }) %>.
+    <% elsif post.data.category %>
+      Posted in <%= link_to post.data.category, category_path(post.data.category) %>.
+    <% elsif post.tags.length > 0 %>
+      Tagged <%= partial("layouts/taglist", :locals => { :tags => post.tags }) %>.
+    <% end %>
+  </footer>
+
+</article>

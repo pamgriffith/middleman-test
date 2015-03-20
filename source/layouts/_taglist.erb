@@ -1,0 +1,1 @@
+<% tags.each_with_index do |tag, i| %><%= link_to tag, tag_path(tag) %><% if i < tags.length - 2 %>, <% elsif i == tags.length - 2 %><% if tags.length > 2 %>, and <% elsif tags.length == 2 %> and <% end %><% end %><% end %>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+  <%= partial "layouts/head" %>
+
+  <body>
+
+    <%= partial "layouts/header" %>
+
+    <div class="wrapper" role="main" id="content">
+      <%= yield %>
+    </div>
+
+    <%= partial "layouts/footer" %>
+
+  </body>
+
+  <script data-main="{{ "/assets/js/main" | prepend: site.baseurl }}" src="{{ "/assets/js/require.js" | prepend: site.baseurl }}"></script>
+
+</html>

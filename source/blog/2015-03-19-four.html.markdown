@@ -1,7 +1,11 @@
 ---
 title: Four
 date: 2015-03-19 22:49 UTC
-tags: test
+tags:
+- test
+- example
+- anothertag
+- asdf
 category: cat2
 ---
 

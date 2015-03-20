@@ -1,4 +1,5 @@
 ---
+layout: base
 pageable: true
 ---
 <% if paginate && num_pages > 1 %>
@@ -10,10 +11,7 @@ pageable: true
 <% end %>
 
 <% page_articles.each_with_index do |article, i| %>
-  <h2><%= link_to article.title, article %> <span><%= article.date.strftime('%b %e') %></span></h2>
-  <!-- use article.summary(250) if you have Nokogiri available to show just
-       the first 250 characters -->
-  <%= article.body %>
+  <%= partial("layouts/postcontent", :locals => { :post => article, :single => false }) %>
 <% end %>
 
 <% if paginate %>

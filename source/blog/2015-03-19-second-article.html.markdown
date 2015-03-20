@@ -1,7 +1,8 @@
 ---
 title: Second article!
 date: 2015-03-19
-tags: example
+tags:
+- example
 category: cat1
 ---
 

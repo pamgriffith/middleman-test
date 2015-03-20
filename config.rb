@@ -39,7 +39,11 @@ activate :blog do |blog|
   }
 end
 
-page "/feed.xml", layout: false
+page "blog/*", :layout => :post
+page "blog/category/*", :layout => :layout
+page "blog/tag/*", :layout => :layout
+page "blog/archive/*", :layout => :layout
+page "blog/feed.xml", layout: false
 
 ###
 # Compass
@@ -88,11 +92,11 @@ page "/feed.xml", layout: false
 #   end
 # end
 
-set :css_dir, 'stylesheets'
+set :css_dir, 'assets/css'
 
-set :js_dir, 'javascripts'
+set :js_dir, 'assets/js'
 
-set :images_dir, 'images'
+set :images_dir, 'uploads'
 
 # Build-specific configuration
 configure :build do

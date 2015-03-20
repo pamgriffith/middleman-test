@@ -1,0 +1,21 @@
+- title: "Blog"
+  href: "/"
+
+- title: "Résumé"
+  href: "/resume/"
+
+- title: "About"
+  href: "/about/"
+
+- title: "Contact"
+  href: "/contact/"
+
+# - title: "subcategory example"
+#   href: "/cat"
+#   subcategories:
+#   - subtitle: "subcat 1"
+#     subhref: "/sub1"
+#   - subtitle: "subcat 2"
+#     subhref: "/sub2"
+#   - subtitle: "subcat 3"
+#     subhref: "/sub3"
