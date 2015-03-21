@@ -1,0 +1,33 @@
+---
+title: Page Not Found
+---
+
+<p>The page you're looking for isn't here. Maybe one of these will help?</p>
+
+<h2>Search</h2>
+<form method="get" action="https://www.google.com/search" class="searchbox">
+    <input type="hidden" value="site:pamgriffith.net" name="q" />
+    <input type="text" name="q" />
+    <div class="button"><button type="submit">Search</button></div>
+</form>
+
+<div class="columns">
+	<div class="half-col left-col">
+		<h2>Categories</h2>
+		<ul class="tag-list">
+		<% categories = blog.articles.group_by {|a| a.metadata[:page]['category'] }%>
+		<% categories.each do |category, articles| %>
+			<li><%= link_to category, category_path(category) %></li>
+		<% end %>
+		</ul>
+	</div>
+
+	<div class="half-col right-col">
+		<h2>Tags</h2>
+		<ul class="tag-list">
+		<% blog.tags.each do |tag, articles| %>
+			<li><%= link_to tag, tag_path(tag) %></li>
+		<% end %>
+		</ul>
+	</div>
+</div>

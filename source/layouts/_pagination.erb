@@ -1,0 +1,9 @@
+<nav role="navigation" class="pagination">
+  <h3 class="assistive-text">Post navigation</h3>
+  <% if next_page %>
+    <%= link_to '← Older posts', next_page, :class => 'nav-older' %>
+  <% end %>
+  <% if prev_page %>
+    <%= link_to 'Newer posts →', prev_page, :class => 'nav-newer' %>
+  <% end %>
+</nav>

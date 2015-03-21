@@ -1,24 +1,21 @@
 ---
 pageable: false
 ---
-<h1>Articles tagged '<%= tagname %>'</h1>
+<article class="archive">
 
-<% if paginate && num_pages > 1 %>
-  <p>Page <%= page_number %> of <%= num_pages %></p>
+  <header class="entry-header">
+    <h1 class="entry-title">Archive of posts with tag '<%= tagname %>'</h1>
+  </header>
 
-  <% if prev_page %>
-    <p><%= link_to 'Previous page', prev_page %></p>
-  <% end %>
-<% end %>
+  <div class="entry-content">
+    <ul>
+    <% page_articles.each_with_index do |article, i| %>
+      <li>
+        <%= link_to article.title, article %>
+        <time class="entry-date" datetime="<%= article.date.strftime('%F') %>"><%= article.date.strftime('%B %-d, %Y') %></time>
+      </li>
+    <% end %>
+    </ul>
+  </div>
 
-<ul>
-  <% page_articles.each_with_index do |article, i| %>
-    <li><%= link_to article.title, article %> <span><%= article.date.strftime('%b %e') %></span></li>
-  <% end %>
-</ul>
-
-<% if paginate %>
-  <% if next_page %>
-    <p><%= link_to 'Next page', next_page %></p>
-  <% end %>
-<% end %>
+</article>
