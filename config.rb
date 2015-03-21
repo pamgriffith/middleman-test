@@ -96,6 +96,8 @@ set :css_dir, 'assets/css'
 
 set :js_dir, 'assets/js'
 
+set :fonts_dir, 'assets/fonts'
+
 set :images_dir, 'uploads'
 
 # Build-specific configuration

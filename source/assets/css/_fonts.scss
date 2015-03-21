@@ -1,0 +1,64 @@
+/* Fonts */
+/* standard weight (actually extra light) */
+@font-face {
+    font-family: 'BrixSlab';
+    src: font-url('BrixSlab-Light-webfont.eot');
+    src: font-url('BrixSlab-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('BrixSlab-Light-webfont.woff') format('woff'),
+         font-url('BrixSlab-Light-webfont.ttf') format('truetype'),
+         font-url('BrixSlab-Light-webfont.svg#BrixSlabExtraLightRegular') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'BrixSlab';
+    src: font-url('BrixSlab-LightItalic-webfont.eot');
+    src: font-url('BrixSlab-LightItalic-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('BrixSlab-LightItalic-webfont.woff') format('woff'),
+         font-url('BrixSlab-LightItalic-webfont.ttf') format('truetype'),
+         font-url('BrixSlab-LightItalic-webfont.svg#BrixSlabExtraLightItalic') format('svg');
+    font-weight: 400;
+    font-style: italic;
+}
+/* bold (actually regular) */
+@font-face {
+    font-family: 'BrixSlab';
+    src: font-url('BrixSlab-Medium-webfont.eot');
+    src: font-url('BrixSlab-Medium-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('BrixSlab-Medium-webfont.woff') format('woff'),
+         font-url('BrixSlab-Medium-webfont.ttf') format('truetype'),
+         font-url('BrixSlab-Medium-webfont.svg#BrixSlabRegularRegular') format('svg');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'BrixSlab';
+    src: font-url('BrixSlab-MediumItalic-webfont.eot');
+    src: font-url('BrixSlab-MediumItalic-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('BrixSlab-MediumItalic-webfont.woff') format('woff'),
+         font-url('BrixSlab-MediumItalic-webfont.ttf') format('truetype'),
+         font-url('BrixSlab-MediumItalic-webfont.svg#BrixSlabRegularItalic') format('svg');
+    font-weight: 700;
+    font-style: italic;
+}
+/* black (for headings) */
+@font-face {
+    font-family: 'BrixSlab';
+    src: font-url('BrixSlab-Black-webfont.eot');
+    src: font-url('BrixSlab-Black-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('BrixSlab-Black-webfont.woff') format('woff'),
+         font-url('BrixSlab-Black-webfont.ttf') format('truetype'),
+         font-url('BrixSlab-Black-webfont.svg#BrixSlabBlackRegular') format('svg');
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'BrixSlab';
+    src: font-url('BrixSlab-BlackItalic-webfont.eot');
+    src: font-url('BrixSlab-BlackItalic-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('BrixSlab-BlackItalic-webfont.woff') format('woff'),
+         font-url('BrixSlab-BlackItalic-webfont.ttf') format('truetype'),
+         font-url('BrixSlab-BlackItalic-webfont.svg#BrixSlabBlackItalic') format('svg');
+    font-weight: 800;
+    font-style: italic;
+}

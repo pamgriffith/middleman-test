@@ -1,0 +1,51 @@
+@charset "utf-8";
+
+
+
+// Our variables
+$base-font-family: BrixSlab, serif;
+$base-font-size:   18px;
+$small-font-size:  $base-font-size * 0.875;
+$base-line-height: 1.6;
+
+$spacing-unit:     24px;
+
+$text-color:       #000000;
+$background-color: #ffffff;
+$brand-color:      #252525;
+
+$heading-color:    #7b0046;
+$heading-hover-color: #ac0062;
+
+$grey-color-light: #898989;
+$grey-color-dark:  #636363;
+$separator-color:  #ededed;
+$grey-bg-light:    #ededed;
+
+$link-color:       #0072bc;
+$link-color-hover: #00a0d7;
+
+$separator: 4px double $separator-color;
+
+
+
+// Media query widths
+$medium-wide:      600px;
+
+
+
+@mixin media-query($device) {
+    @media screen and (min-width: $device) {
+        @content;
+    }
+}
+
+
+
+@import
+        "normalize",
+        "fonts",
+        "base",
+        "layout",
+        "syntax-highlighting"
+;

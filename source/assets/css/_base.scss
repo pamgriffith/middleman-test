@@ -1,0 +1,173 @@
+%smalltext {
+    font-size: 14px;
+    font-size: 0.7777777778rem;
+}
+%standardmargin {
+    margin: 0 0 24px;
+    margin: 0 0 1.3333333333rem;
+}
+%smallpad {
+    padding: 6px;
+    padding: .3333333333rem;
+}
+
+/**
+ * Screen reader and tab access only
+ */
+.assistive-text {
+    position: absolute !important;
+    clip: rect(1px, 1px, 1px, 1px);
+
+    &:hover, &:active, &:focus {
+        background: #fff;
+        border: 2px solid;
+        clip: auto !important;
+        color: $text-color;
+        display: block;
+        font-size: $base-font-size;
+        padding: $base-font-size / 2;
+        position: absolute;
+        top: $base-font-size / 2;
+        left: $base-font-size / 2;
+        z-index: 100000;
+    }
+}
+
+/**
+ * Typography
+ */
+html {
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    color: $text-color;
+    background-color: $background-color;
+}
+
+h1.site-title a {
+    color: $text-color;
+    &:hover {
+        color: $heading-hover-color;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: $heading-color;
+    font-weight: 800;
+    margin: 24px 0;
+    margin: 1.3333333333rem 0;
+}
+
+h1 {
+    font-size: 27px;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    a {
+        color: $heading-color;
+        text-decoration: none;
+        &:hover {
+            color: $heading-hover-color;
+        }
+    }
+    @include media-query($medium-wide) {
+        font-size: 42px;
+        font-size: 2.3333333333rem;
+        line-height: 1;
+    }
+}
+h2 {
+    font-size: 24px;
+    font-size: 1.3333333333rem;
+}
+h3 {
+    font-size: 21px;
+    font-size: 1.1666666666rem;
+}
+h4 {
+    font-size: 18px;
+    font-size: 1rem;
+}
+h5 {
+    font-size: 16px;
+    font-size: 0.8888888889rem;
+}
+h6 {
+    font-size: 14px;
+    font-size: 0.7777777778rem;
+}
+
+p, embed, object, video, iframe, code, dl, ol, ul, blockquote, table {
+    @extend %standardmargin;
+}
+
+ol, ul {
+    ol, ul {
+        margin-bottom: 0;
+    }
+}
+
+a {
+    color: $link-color;
+
+    &:hover {
+        color: $link-color-hover;
+    }
+}
+
+video, img {
+    max-width: 100%;
+}
+
+table {
+    @extend %smalltext;
+}
+thead {
+    border-bottom: 1px solid $separator-color;
+    th {
+        vertical-align: bottom;
+        text-align: left;
+        @extend %smallpad;
+    }
+}
+tbody {
+    tr {
+        border-bottom: 1px dotted $separator-color;
+    }
+    td, th {
+        vertical-align: top;
+        @extend %smallpad;
+    }
+}
+
+code, pre {
+    @extend %smalltext;
+    margin: 0;
+    padding: 0;
+}
+
+figure {
+    @extend %smalltext;
+    @extend %standardmargin;
+    font-style: italic;
+}
+
+.form-row {
+    @extend %standardmargin;
+}
+label {
+    display: block;
+}
+input, textarea {
+    width: 100%;
+}
+input, textarea, button {
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+    color: $text-color;
+    padding: 3px 6px;
+    box-sizing: border-box;
+}
+.honeypot {
+    display: none;
+}
