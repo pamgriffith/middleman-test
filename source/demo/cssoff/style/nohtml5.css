@@ -1,0 +1,79 @@
+@charset "utf-8";
+/* CSS Document */
+/* this file makes the page legible in Internet Explorer when javascript is not available to make the html5 elements styleable */
+
+.no-js body {
+	width: 940px;
+	margin: 0 auto;
+}
+
+.no-js h1 {
+	position: relative;
+	z-index: 2;
+	text-transform: uppercase;
+	font-family: "Helvetica Neue", helvetica, arial, sans-serif;
+	font-weight: 100;
+	font-stretch: condensed;
+	font-size: 56.26px;
+	color: #cacaca;
+}
+
+.no-js ul {
+	width: 100%;
+	background-color: rgb(110, 38, 38);
+	margin-top: 20px;
+	padding-left: 10px;
+}
+.no-js ul li {
+	float: left;
+	margin-right: 15px;
+}
+.no-js ul li a, .no-js ul li a:visited {
+	color: #da6363;
+	font-size: 16px;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 25px;
+}
+.no-js ul li a:hover {
+	color: #ff9999;
+}
+.no-js ul li a:active {
+	color: #ffcccc;
+}
+
+
+.no-js .main h1 {
+	font-weight: 200;
+	font-size: 29px;
+	color: #bdbdbd;
+	padding-top: 40px;
+	margin-bottom: 10px;
+	font-stretch: normal;
+	clear: both;
+}
+
+
+.no-js a img {
+	clear: both;
+	display: block;
+	margin-top: 20px;
+}
+
+
+.no-js #einstein, .no-js #count, .no-js #teacher {
+	text-align: left;
+	width: auto;
+	height: auto;
+	padding: 10px;
+	width: 224px;
+	height: 125px;
+	float: left;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+
+.no-js h2 {
+	clear: both;
+}

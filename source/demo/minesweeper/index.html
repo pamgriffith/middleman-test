@@ -1,0 +1,559 @@
+<html>
+<head>
+
+<style>
+table {
+	margin-left:auto;
+	margin-right:auto;
+}
+
+#minefield {
+	background-color:antiquewhite;
+	border: black 1px solid;
+	margin-left:auto;
+	margin-right:auto;
+}
+#instructions {
+	font-weight: bold;
+}
+.gameinfo {
+	height: auto;
+	text-align: left;
+}
+#minesleft {
+	font-weight: bold;
+}
+li {
+	margin-top: 10px;
+}
+
+
+/*these don't actually do anything because IE won't let me change object classes so all cell properties are in the javascript as global variables*/
+.cell {
+	background-color:pink;
+}
+.mine {
+	background-color:red;
+}
+.clicked {
+	background-color:white;
+}
+.flag {
+	background-color:blue;
+}
+div > div {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	font-size: 15px;
+}
+
+</style>
+
+<script>
+//cell property variables
+var cellcolor = 'pink';
+var flagcolor = 'cornflowerblue';
+var clickedcolor = 'white';
+var minecolor = 'red';
+var mismarkedcolor = 'orange'; //mines that have been flagged incorrectly
+var unmarkedcolor = 'green'; //mines that were not flagged at gameover
+var cellfont = '15px';
+
+//field variables
+var cellwidth = 20; //cells are assumed to be square, so this is used for width and height
+var margin = 2;
+var fieldwidth = 9;
+var fieldheight = 9;
+var mines = 10;
+
+getdifficulty(); //modifies default field variables based on difficulty setting
+
+var cells = new Array();
+initcells(); //sets up the number of cells and default cell values
+
+//game variables
+var numclicked = 0;
+var numflagged = 0;
+var gameover = false;
+
+//timer variables
+var minutes = 0;
+var seconds = 0;
+var timestart = false;
+
+var flagsquare = false; //detects keypress to indicate that the square should be flagged, not clicked
+document.onkeydown = startflag;
+document.onkeyup = stopflag;
+
+
+
+
+
+//setup functions:
+
+function Cell () {
+//this is a cell object
+	this.ismine = false;
+	this.clicked = false;
+	this.flagged = false;
+	this.nummines = 0;
+}
+
+function initcells () {
+//fills cells[] with default Cell objects
+//default Cell values will be modified in getmines() and getnumbers()
+	for (var i=0; i<fieldwidth*fieldheight; i++) {
+		cells[i] = new Cell();
+	}
+}
+
+function getdifficulty () {
+//parses the document location and changes the field size and number of mines if it finds "medium" or "hard"
+//"easy" corresponds to the default values, so it makes no changes
+//no phrase or an unrecognized phrase will use the default values
+	var location = new String(document.location);
+	var difficulty_array = location.split('?');
+	if (difficulty_array[1]) var difficulty = difficulty_array[1].toLowerCase();
+	else var difficulty = null;
+	//change values if difficulty is medium or hard, otherwise use defaults above
+	if (difficulty=='medium') {
+		fieldwidth = 16;
+		fieldheight = 16;
+		mines = 40;
+	} else if (difficulty=='hard') {
+		fieldwidth = 30;
+		fieldheight = 16;
+		mines = 99;
+	}
+}
+
+function makefield () {
+//sets up the field size and calls makecells to put cells in it
+	var field = document.getElementById('minefield');
+	field.style.width = (cellwidth + margin) * fieldwidth + margin;
+	field.style.height = (cellwidth + margin) * fieldheight + margin;
+	makecells();
+}
+
+function makecells () {
+//sets mines and cell properties and puts cells into the field
+//cells start at cells[0] in the top left and count across then down
+
+	var field = document.getElementById('minefield');
+	getmines();
+	getnumbers();
+	//loop through rows (i)
+	for (var i=0; i<fieldheight; i++) {
+		//loop through columns (j)
+		for (var j=0; j<fieldwidth; j++) {
+			//make the cell
+			var leftmarg = j * (cellwidth + margin) + margin;
+			var topmarg = i * (cellwidth + margin) + margin;
+			var newcell = document.createElement('div');
+			newcell.style.marginLeft = leftmarg;
+			newcell.style.marginTop = topmarg;
+			var cellnum = i*fieldwidth + j;
+			newcell.setAttribute('id',cellnum);
+			newcell.onmousedown = checkclick; //check for normal or flag click
+			newcell.ondblclick = multiclick;
+
+			//setting the class attribute or className does not work in internet explorer
+			newcell.style.backgroundColor = cellcolor;
+			newcell.style.width = cellwidth;
+			newcell.style.height = cellwidth;
+			newcell.style.position = 'absolute';
+			newcell.style.fontSize = cellfont;
+
+			field.appendChild(newcell);
+		}
+	}
+}
+
+function getmines () {
+//this function will set up the mines
+//false means no mine, true means that cell has a mine
+
+	var numcells = fieldwidth * fieldheight;
+
+	//figure out where the mines go
+	for (var i=0; i<mines; i++) {
+		var newnum = false;
+		while (!newnum) {
+			var cellnum=Math.floor(Math.random()*numcells);
+			if (cells[cellnum].ismine != true) {
+				cells[cellnum].ismine = true;
+				newnum = true;
+			}
+		}
+	}
+}
+
+function getnumbers () {
+//figures out how many of the cells surrounding a cell are mines
+	for (var i=0; i<cells.length; i++) {
+		if (!cells[i].ismine) {
+
+		//this part is very similar to checkaround()
+
+			//straight up and straight down work for all cells
+			if ((i-fieldwidth)>=0)
+				if (cells[i-(fieldwidth)].ismine) cells[i].nummines++;
+			if ((i+fieldwidth)<(fieldwidth*fieldheight))
+				if (cells[i+(fieldwidth)].ismine) cells[i].nummines++;
+
+			//up-left, left, down-left work for cells not on left edge
+			if (!isleftedge(i)) {
+				if ((i-fieldwidth)>=0)
+					if (cells[i-(fieldwidth+1)].ismine) cells[i].nummines++; //up-left
+				if (cells[i-1].ismine) cells[i].nummines++; //left
+				if ((i+fieldwidth)<(fieldwidth*fieldheight))
+					if (cells[i+(fieldwidth-1)].ismine) cells[i].nummines++; //down-left
+			}
+
+			//up-right, right, down-right work for cells not on right edge
+			if(!isrightedge(i)) {
+				if ((i-fieldwidth)>=0)
+					if (cells[i-(fieldwidth-1)].ismine) cells[i].nummines++; //up-right
+				if (cells[i+1].ismine) cells[i].nummines++; //right
+				if ((i+fieldwidth)<(fieldwidth*fieldheight))
+					if (cells[i+(fieldwidth+1)].ismine) cells[i].nummines++; //down-right
+			}
+
+		} else cells[i].nummines = '*';
+	}
+}
+
+
+
+
+//clicking functions
+
+function checkclick (e) {
+//determines whether the player meant to click or flag a cell and sends it to the appropriate function
+	if (gameover) return;
+	if (!timestart) timer();
+
+	if (!e) var e = window.event;
+
+	//get the cell
+	var cell;
+	if (e.target) cell = e.target;
+	else if (e.srcElement) cell = e.srcElement;
+	if (cell.nodeType == 3) cell = cell.parentNode;  //make sure it's the div, not a text node
+
+	//detect button - flag if middle or right click
+	var flag;
+	if (e.which) {
+		if ((e.which == 2)||(e.which == 3)) flag = true;
+	} else if (e.button) {
+		if ((e.button == 4)||(e.button == 2)) flag = true;
+	}
+
+	if (flag) addflag(cell.id); //they used the left or middle mouse button to flag
+	else if (flagsquare) addflag(cell.id); //they hit the f key to flag
+	else click(cell.id); //no flag, click() it
+
+	return false; //prevent right click menu from popping up, if the browser allows that
+}
+
+function click (cellnum) {
+//reveals the cell number or mine
+//cell number zero runs click for all surounding cells
+//if it is a mine, the player loses
+//if all cells that are not mines have been clicked, the player wins
+	cellnum = parseInt(cellnum); //because it comes out of checkclick as a string
+
+	//take care of top and bottom cases
+	if((cellnum<0)||(cellnum>=fieldwidth*fieldheight)) return;
+
+	//check if it has been clicked already
+	if(!cells[cellnum].clicked) {
+		cells[cellnum].clicked = true; //mark it as having been clicked (even if it's a mine)
+		//check if it is a mine
+		if(!cells[cellnum].ismine) {
+			//alert(cellnum);
+			document.getElementById(cellnum).style.backgroundColor = clickedcolor;
+
+			if(cells[cellnum].nummines==0) {
+				//click everything around it
+				clickaround(cellnum);
+			} else {
+				//if it's not zero, display the number
+				var number = document.createTextNode(cells[cellnum].nummines);
+				document.getElementById(cellnum).appendChild(number);
+			}
+
+			numclicked++;
+			if(numclicked == fieldwidth*fieldheight - mines) win();
+
+		} else {
+			//show the mine
+			document.getElementById(cellnum).style.backgroundColor = minecolor;
+			var number = document.createTextNode(cells[cellnum].nummines);
+			document.getElementById(cellnum).appendChild(number);
+			lose();
+		}
+	}
+}
+
+function multiclick (e) {
+//if a clicked cell has the appropriate number of flags around it, sends all surrounding cells to click()
+	if (gameover) return;
+
+	if (!e) var e = window.event;
+
+	//get the cell id
+	var cell;
+	if (e.target) cell = e.target;
+	else if (e.srcElement) cell = e.srcElement;
+	if (cell.nodeType == 3) cell = targ.parentNode;  //make sure it's the div, not a text node
+	cellnum = parseInt(cell.id);
+
+	//if the cell has been clicked touches the right number of flags, click everything around it
+	if ((cells[cellnum].clicked)&&(checkaround(cellnum)==cells[cellnum].nummines)) clickaround(cellnum);
+}
+
+function clickaround (cellnum) {
+//sends all surrounding cells to click()
+	//send all cells around the current cell to the click function
+
+	//straight up and straight down work for all cells
+	if ((cellnum-fieldwidth)>=0)
+		click(cellnum-fieldwidth);
+	if ((cellnum+fieldwidth)<(fieldwidth*fieldheight))
+		click(cellnum+fieldwidth);
+
+	//up-left, left, down-left work for cells not on left edge
+	if (!isleftedge(cellnum)) {
+		if ((cellnum-fieldwidth)>=0)
+			click(cellnum-(fieldwidth+1)); //up-left
+		click(cellnum-1); //left
+		if ((cellnum+fieldwidth)<(fieldwidth*fieldheight))
+			click(cellnum+(fieldwidth-1)); //down-left
+	}
+
+	//up-right, right, down-right work for cells not on right edge
+	if(!isrightedge(cellnum)) {
+		if ((cellnum-fieldwidth)>=0)
+			click(cellnum-(fieldwidth-1)); //up-right
+		click(cellnum+1); //right
+		if ((cellnum+fieldwidth)<(fieldwidth*fieldheight))
+			click(cellnum+(fieldwidth+1)); //down-right
+	}
+}
+
+function checkaround (cellnum) {
+//checks how many of the surrounding cells are flagged (regardless of whether they are mines)
+	var numflags = 0;
+
+	//straight up and straight down work for all cells
+	if ((cellnum-fieldwidth)>=0)
+		if (cells[cellnum-fieldwidth].flagged) numflags++;
+	if ((cellnum+fieldwidth)<(fieldwidth*fieldheight))
+		if (cells[cellnum+fieldwidth].flagged) numflags++;
+
+	//up-left, left, down-left work for cells not on left edge
+	if (!isleftedge(cellnum)) {
+		if ((cellnum-fieldwidth)>=0)
+			if (cells[cellnum-(fieldwidth+1)].flagged) numflags++; //up-left
+		if (cells[cellnum-1].flagged) numflags++; //left
+		if ((cellnum+fieldwidth)<(fieldwidth*fieldheight))
+			if (cells[cellnum+(fieldwidth-1)].flagged) numflags++; //down-left
+	}
+
+	//up-right, right, down-right work for cells not on right edge
+	if(!isrightedge(cellnum)) {
+		if ((cellnum-fieldwidth)>=0)
+			if (cells[cellnum-(fieldwidth-1)].flagged) numflags++; //up-right
+		if (cells[cellnum+1].flagged) numflags++; //right
+		if ((cellnum+fieldwidth)<(fieldwidth*fieldheight))
+			if (cells[cellnum+(fieldwidth+1)].flagged) numflags++; //down-right
+	}
+	
+	return numflags;
+}
+
+
+
+
+//flag functions
+
+function addflag (cellnum) {
+//adds or removes a flag from the clicked cell
+	if (!cells[cellnum].flagged) {
+		if (!cells[cellnum].clicked) {
+			//if it isn't flagged or clicked, flag it and make it unclickable
+			document.getElementById(cellnum).style.backgroundColor = flagcolor;
+			updatespan(cellnum,'F');
+			cells[cellnum].flagged = true;
+			cells[cellnum].clicked = true;
+			numflagged++;
+		}
+		//does not flag an unflagged number that has been revealed
+	} else {
+		//if it's flagged, unflag it and make it clickable
+		document.getElementById(cellnum).style.backgroundColor = cellcolor;
+		updatespan(cellnum,'');
+		cells[cellnum].flagged = false;
+		cells[cellnum].clicked = false;
+		numflagged--;
+	}
+	minesleft(); //change the remaining mines display
+}
+
+function startflag (e) {
+//detects a keypress and determines if it is the letter f to allow flagging
+	if (!e) var e = window.event;
+	if (e.keyCode == 70) flagsquare = true;
+}
+function stopflag (e) {
+//detects a key release and determines if it is the letter f to stop flagging
+	if (!e) var e = window.event;
+	if (e.keyCode == 70) flagsquare = false;
+}
+
+
+
+
+//general functions
+
+function updatespan (spanname, newval) {
+	var span = document.getElementById(spanname);
+	while (span.childNodes[0])
+		span.removeChild(span.childNodes[0]);
+	span.appendChild(document.createTextNode(newval));
+}
+
+function isrightedge (cellnum) {
+	//cell numbers start at 0
+	//so the cells at the right will be one less than a multiple of fieldwidth
+	if ((cellnum + 1)%fieldwidth == 0) return true;
+	else return false;
+}
+
+function isleftedge (cellnum) {
+	//cell numbers start at 0
+	//so the cells at the left will be a multiple of fieldwidth (being the right edge plus 1)
+	if (cellnum%fieldwidth == 0) return true;
+	else return false;
+}
+
+
+
+
+//game and display functions
+
+function win () {
+	gameover = true;
+	markmines();
+	alert('you win!');
+}
+
+function lose () {
+	gameover = true;
+	markmines();
+	alert('you lose :(');
+}
+
+function minesleft () {
+//calculates the number of mines remaining and displays them
+	var minespan = document.getElementById('minesleft');
+	if (mines-numflagged<0) minespan.style.color = 'red';
+	else minespan.style.color = 'black';
+	if ((mines-numflagged == 1) || (mines-numflagged == -1)) {
+		document.getElementById('minesplural').style.display = 'none';
+	} else {
+		document.getElementById('minesplural').style.display = 'inline';
+	}
+	updatespan('minesleft',mines-numflagged);
+}
+
+function markmines () {
+//shows the mines at gameover
+	for (var i=0; i<cells.length; i++) {
+		if(cells[i].ismine) {
+			//show unflagged mines (that aren't the one clicked)
+			if((!cells[i].clicked)&&(!cells[i].flagged)) {
+				document.getElementById(i).style.backgroundColor = unmarkedcolor;
+				updatespan(i,'*');
+			}
+		} else if(cells[i].flagged) {
+			//show flagged spaces that are not mines
+			document.getElementById(i).style.backgroundColor = mismarkedcolor;
+			updatespan(i,'X');
+		}
+	}
+}
+
+function timer () {
+//starts the timer, runs on first click
+	timestart = true;
+	seconds++;
+	setTimeout("updatetimer()", 1000);
+}
+
+function updatetimer () {
+//increments seconds and updates the time display
+	if (gameover) return;
+	var minstring;
+	var secstring;
+	if (seconds == 60) {
+		minutes++;
+		seconds = 0;
+		if (minutes<10) minstring = '0' + minutes;
+		else minstring = minutes;
+		updatespan('minutes',minstring);
+	}
+	if (seconds<10) secstring = '0' + seconds;
+	else secstring = seconds;
+	updatespan('seconds',secstring);
+	seconds++;
+	setTimeout("updatetimer()", 1000);
+}
+
+function changedifficulty (difficulty) {
+//reloads the page with selected difficulty
+	if (difficulty!=0) {
+		var location = new String(document.location);
+		var location_array = location.split('?');
+		//if they've selected the current difficulty, do nothing
+		if (location_array[1])
+			if (difficulty==location_array[1].toLowerCase()) return;
+		//otherwise, reload the page with the new difficulty in the location
+		var newlocation = location_array[0] + '?' + difficulty;
+		document.location = newlocation;
+	}
+}
+
+</script>
+
+</head>
+<body onLoad="javascript:makefield();">
+
+<table>
+<tr>
+<td rowspan="4"><div id="minefield"></div></td>
+<td class="gameinfo"><span id="minesleft"><script>document.write(mines);</script></span> Mine<span id="minesplural">s</span> left</td>
+</tr>
+<tr><td class="gameinfo"><span id="minutes">00</span>:<span id="seconds">00</span></td></tr>
+<tr><td class="gameinfo"><button onClick="window.location.reload();">New Game</button></td></tr>
+<tr><td class="gameinfo">
+	<select id="difficulty" onChange="javascript:changedifficulty(this.options[this.selectedIndex].value);">
+		<option value="0">--Change Difficulty--</option>
+		<option value="easy">Easy</option>
+		<option value="medium">Medium</option>
+		<option value="hard">Hard</option>
+	</select>
+</td></tr>
+<tr><td colspan="2" id="instructions">
+<ul>
+<li>To add a flag, use the middle or left mouse button<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or hold the f key and click</li>
+<li>Double click to select all surrounding cells</li>
+</ul>
+</td></tr>
+</table>
+
+<body>
+</html>

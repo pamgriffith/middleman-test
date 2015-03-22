@@ -1,0 +1,41 @@
+---
+title: Reminders for infrequent tasks
+category: Design Ideas
+tags:
+- Reminders Project
+comments: []
+---
+<p>I've had this idea floating around for a while that it would be nice to have something to remind me to do things that I do infrequently--things like change the oil in my car, change the air filters, go to the doctor for check-ups, etc.</p>
+<p>These are the sorts of tasks that need to be done every few months or yearly, but the exact date on which I do them doesn't matter, there's just sort of an open time window.  I've been using Google calendar to send me an email about these things, but since the date doesn't really matter I don't do them right away and then the notification is gone and I forget.</p>
+<p>So I've been thinking a lot about reminders, and what people need in a reminder system like this, and I decided maybe I should design and build something.  Designing is fun, and building would give me an opportunity to learn something new, like maybe Ruby on Rails or Django.</p>
+<p>I'm sort of designing for myself, but one of the goals here is to make it general enough that a lot of people might find it useful.</p>
+<h2>Requirements</h2>
+<p>The big problem with the email reminders from google calendar is the email comes once (or however many times you set it up for), is tied to a particular day, and then it's gone whether you've done it or not.  But unlike events, tasks usually don't just go away at a particular date, they remain until you do them.</p>
+<p>To some extent, physical calendars have this property--you can see all of the tasks for the month every time you look at it until you turn to the next month.  A string around your finger will stick around until you take it off, as will a note stuck to something you see every day.</p>
+<p>So that gives us the first requirement:<strong></strong></p>
+<ol start="1">
+<li><strong>Persistent</strong>.  Reminders should stick around until the task is done.</li>
+</ol>
+<p>Another quality possessed by calendars, strings, and notes but not necessarily emails is that they are available even when you aren't specifically looking for them.  When a reminder is on a calendar, you may be looking up something else, but it's there at the periphery reminding you.  You may never have to explicitly look for it, it's just there already.  That quality is called <em>ambient awareness</em>.</p>
+<p>Of course, something to keep in mind about ambient reminders is that after a while they become like the furniture in your house, you just walk around it without thinking about it anymore.  If a reminder sticks around too long, a user may cease noticing it and forget about it.</p>
+<p>So our second requirement:</p>
+<ol start="2">
+<li><strong>Ambient, with optional occasional foregrounding</strong>.  Reminders should be available without specifically looking for them, but occasionally bringing them to the users explicit attention may be ok.</li>
+</ol>
+<p>The third requirement perhaps should go without saying, because it's about general usability and overhead.  Setting up these reminders should be no more difficult than writing them on a calendar or it's not going to happen.  Everything that isn't necessary should be out of the way or rephrased to fit the task at hand.</p>
+<p>For instance, don't ask the user to translate "I need to do this in 6 months" into a specific date; a calendar does, of course, but that can be done relatively quickly visually.  A text box requires extra mental calculation, and it's not even necessary since the date isn't already important to the user.</p>
+<p>So the third requirement is just basic ease of use:</p>
+<ol start="3">
+<li><strong>Quick and easy</strong>.  Don't ask unnecessary questions.</li>
+</ol>
+<p>A lot of things don't make it into calendars because the calendar isn't there right when someone is thinking about something they need reminding about.  It's also not reasonable to ask users to check something every day to see if they created a reminder 6 months ago.  So that's our final requirement, and it's sort of related to making things quick and easy:</p>
+<ol start="4">
+<li><strong>Always available</strong>.  Users shouldn't have to remember to create or check their reminders.</li>
+</ol>
+<h2>Some brainstorming</h2>
+<p>There are a number of things that many people see and check everyday on their computers, like their desktop, their email, their web browsers, social network sites, etc.  It seems like the most natural and universal place to put something like this is probably the desktop, and newer operating systems already have desktop widgets that open when the computer starts.</p>
+<p>I've never made one before, but it sounds like both windows and mac widgets are based to some extent on html, css, and javascript, which may mean I can make something at least somewhat cross-platform.  I'm not sure about the widgets that come with some flavors of Linux.  There may also be some facility for local storage, but if I want to make it available anywhere--any computer, phone, etc.--storing data "in the cloud" may be a better idea.  That means looking directly at a website or using apis, and it also means account creation and all that that entails.</p>
+<p>I also wanted to consider "foregrounding" the ambient reminders, which means some sort of notification.  I'm not sure how desktop widgets hook up to the various platform notification systems, but email might do also.</p>
+<p>I'm not really sure how important the "available anywhere" component is.  Certainly many people have multiple computers, but I'm not sure about mobile.  I suspect that creating reminders will be more important than checking them there.  Either way, I think I would prefer to create a mobile site than a dozen mobile apps tailored to different devices, especially if Apple is outlawing anything not originally written in Objective C.</p>
+<h2>What to call it?</h2>
+<p>I'm terrible at naming things, so suggestions would be appreciated.</p>

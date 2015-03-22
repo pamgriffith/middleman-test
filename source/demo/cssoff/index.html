@@ -1,0 +1,108 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8" />
+<title>Time Keeps On Ticking</title>
+
+<!-- this file is built to the manifesto that html is data, and taken as a chance to make use of new css3 and html5 
+     techniques.  I tried to avoid putting layout-specific markup into the html to the greatest extent possible, in 
+	 some cases going to javascript to provide additional features unavailable in css.  for a real project, I probably
+	 would have made different choices, but for this I have tried to remain as true to that ideal as possible. -->
+
+<link rel="stylesheet" href="style/main.css" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+<!-- the javascript in this file is rather inefficient and silly, and would be better off replaced with additional 
+     markup and css, but for this project I wanted to explore the possibility of doing without. -->
+<script type="text/javascript" src="style/things-css-should-be-able-to-do-but-inexplicably-cant.js"></script>
+
+<script type="text/javascript" src="style/modernizr-1.1.min.js"></script>
+
+<!-- extra touches for browsers without css3.  these aren't really necessary, but are more there for proof that, yes
+     these things can still be done in browsers that don't really support them.  for the non-javascript pieces, if
+	 it were a design requirement I would have built it that way into main.css and not used css3, but since this is
+	 a demo piece and a chance to make use of css3 I've tacked it on in a separate file so it's easy to see what the
+	 css3 degrades to without it :) -->
+<link rel="stylesheet" href="style/nocss3.css" />
+<script type="text/javascript" src="style/nocss3.js"></script>
+
+<!--[if lte IE 8]>
+	<!-- html 5 in IE requires javascript (specifically modernizr-1.1.min.js), nohtml5.css makes the page a little nicer when javascript is disabled. -->
+	<link rel="stylesheet" type="text/css" media="all" href="style/nohtml5.css"/>
+	<link rel="stylesheet" type="text/css" media="all" href="style/ie8.css"/>
+<![endif]-->
+<!--[if lte IE 7]>
+	<link rel="stylesheet" type="text/css" media="all" href="style/ie7.css"/>
+<![endif]-->
+<!--[if lt IE 7]>
+	<script src="http://ie7-js.googlecode.com/svn/version/2.0(beta3)/IE7.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="style/ie6.css"/>
+<![endif]-->
+
+</head>
+
+<body>
+
+<header class="page_title">
+	<div id="logo"><img src="images/clock.png" /></div>
+	<hgroup>
+		<h1>Time keeps on ticking</h1>
+	</hgroup>
+</header>
+
+<nav>
+	<ul>
+		<li><a href="#">Nav One</a></li>
+		<li><a href="#">Nav Two</a></li>
+		<li><a href="#">Nav Three</a></li>
+	</ul>
+</nav>
+
+<div class="main">
+	<section class="text">
+		<header>
+			<h1>For every minute spent in organizing, an hour is earned</h1>
+			<time datetime="2009-02-02">Tuesday February 2nd, 2009</time>
+		</header>
+		<div class="text_body">
+			<figure><img src="images/davinci.jpg" alt="Da Vinci's notebook"/><p>Da Vinci's Notebook</p></figure>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <a href="#">Aenean ultricies</a> mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt <em>condimentum</em>, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus.</p>
+			<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <a href="#">Aenean ultricies</a> mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae.</p>
+			<a href="#" class="more">keep reading</a>
+		</div>
+	</section>
+	
+	<section class="photos">
+		<figure>
+			<a href="#"><img src="images/gears.jpg" alt="large red gears" /></a>
+			<cite class="vcard">photo by <a class="url fn" href="#">Elsie esq.</a></cite>
+			<p>A clock is just a complex system of gears. Why all the gears? The more of them there are, the higher you can get the force to movement ratio and the longer it can run between winding.</p>
+		</figure>
+		<figure>
+			<a href="#"><img src="images/lost.jpg" alt="yellow numbers in front of a face" /></a>
+			<cite class="vcard">photo by <a class="url fn" href="#">stuartpilbrow</a></cite>
+			<p>4 8 15 16 23 42. The bizarre numbers from LOST. What do they mean? Do they have something to do with time travel?</p>
+		</figure>
+		<figure>
+			<a href="#"><img src="images/clock.jpg" alt="spiral clock" /></a>
+			<cite class="vcard">photo by <a class="url fn" href="#">Robbert van der Steeg</a></cite>
+			<p>Like a fun house mirror meets Dali. Time keeps on slipping slipping slipping.</p>
+		</figure>
+	</section>
+</div>
+
+<footer>
+	<section class="quotations">
+		<p id="einstein">The only reason for time is so that everything doesn't happen at once.</p>
+		<p id="count">Don’t count every hour in the day, make every hour in the day count.</p>
+		<p id="teacher">Time is the cruelest teacher; first she gives the test, then teaches the lesson.</p>
+	</section>
+	
+	<section class="copyright">
+		<h2>can I get you now, Or must I hesitate?</h2>
+		<cite>&copy;2010 Time Keeps on Ticking</cite>
+	</section>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+---
+title: Reminders, part 4 - deleting accounts
+category: Design Ideas
+tags:
+- Reminders Project
+- Privacy
+comments: []
+---
+<p>The last piece of account management for the <a title="Reminders" href="<%= data.meta.baseurl %>/portfolio/reminders">reminders project</a> that I haven't mentioned yet is account deletion.  One of the goals I try to keep in mind is that every action should be reversible.  So if you create an account, you should be able to delete it.  But the converse should also be true--if you delete your account, it would be nice if you could get it back, at least for a little while afterwards.  Some sites get around this by not having true account deletion, only deactivation, but I don't really like that approach; I'm a big advocate of users being able to have control over their information, and if they ask for it to be deleted then by gosh it should actually be deleted.</p>
+<p>So I'm going to go with more of an email trash folder sort of approach here: users can hit a delete button and it gets scheduled for deletion some amount of time later, and during the intervening time they can come back any time and export their data or cancel the deletion.  After that time window the account is irretrievably gone.</p>
+<h2>Design requirements</h2>
+<p>Account deletion will live on an account settings page along with turning turning emails on and off, changing passwords, changing email addresses, and exporting all reminders to various calendar formats.  The user should be aware before they delete their account that they will have a time window to cancel and that they can export everything, and these should both be reiterated after they submit the account deletion form, every time they log in after that, and on the account settings page.  It should be possible to cancel deletion or export data directly from those messages.</p>
+<p>I would also like a form for users to provide feedback about why they are deleting their account after the deletion form is submitted and on the account settings page.  It should disappear permanently from both places once it is submitted.  The form would be completely optional and open ended, and the wording should be of the "Please help us make our service better" variety.</p>
+<h2>Permanent deletion? But what about backups?</h2>
+<p>Ideally, when an account is deleted all data is scrubbed from everywhere--I don't want to have it anymore.  The trouble is that the data will continue to exist and can be restored from any database dumps I have lying around.  I'd like it to be purged from those, too, but it's not a great idea to be modifying your backups.</p>
+<p>I may need someone more in tune with database administration and  automated backups, replication, etc. to help me out on this one; I'm sure it's a solved problem, but I'm not succeeding in finding solutions.  The best one I can think of is to only keep a few days worth of daily backups, and purge the oldest every time a new one is created (and tested for integrity, etc.)</p>

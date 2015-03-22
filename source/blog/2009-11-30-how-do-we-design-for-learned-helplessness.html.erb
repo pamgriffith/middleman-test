@@ -1,0 +1,68 @@
+---
+title: How do we design for learned helplessness?
+category: Design Critique
+tags:
+- Psychology
+comments:
+- id: 30
+  author: Margaret Organ-Kean
+  author_email: margaret@organ-kean.com
+  author_url: http://organ-kean.com
+  date: !binary |-
+    MjAxMC0wMi0xMiAyMDo1NToxNiAtMDUwMA==
+  date_gmt: !binary |-
+    MjAxMC0wMi0xMyAwNDo1NToxNiAtMDUwMA==
+  content: ! "Thank you - this is a good article.\r\n\r\nOn easy-to-remember but hard-to-break
+    passwords, I find that its good to pick a phrase such as '76 Trombones in the
+    Big Parade!' where you can parse it out using the numbers, first (or last) letters
+    and punctuation - thereby getting\r\n\r\n76TitBP!\r\n\r\nNot obvious, not a word,
+    but pretty easy to remember."
+- id: 39
+  author: Pam Griffith
+  author_email: pam@pamgriffith.net
+  author_url: http://www.pamgriffith.net
+  date: !binary |-
+    MjAxMC0wMi0xNSAxNzo1Mjo0MCAtMDUwMA==
+  date_gmt: !binary |-
+    MjAxMC0wMi0xNiAwMTo1Mjo0MCAtMDUwMA==
+  content: Thanks for your comment :)  That is a great strategy.  At the time I figured
+    it was more harmful to say anything that would make Mom feel like she was doing
+    anything wrong than any of the potential harms of an easy-to-guess facebook password,
+    but maybe there's a way to build that advice into the interface--instead of saying
+    "weak," maybe something more verbose like "that password is pretty easy to guess,
+    here are some strategies for creating good passwords that are easy to remember..."
+---
+<p>Over thanksgiving weekend I had the experience of helping my mother reset her Facebook password.  Now, she doesn't really know anything about computers, but she's an intelligent woman and perfectly capable of learning if she only believed she could.  The whole conversation between us was littered with her saying she couldn't possibly do it herself, she'd never remember what I was telling her, etc.  Let's take this bit about copy-paste:</p>
+<blockquote><p><strong>Mom</strong>: "There were all these numbers and letters I had to type in the email, and I wrote them down but it didn't work."</p>
+<p><strong>Me</strong>: "You know, you can get the computer to copy that for you and tell it to stick it into the other window."</p>
+<p><strong>Mom</strong>: "You can?  I didn't know that."</p>
+<p><strong>Me</strong>: "Yeah, it's really handy, I'll show you."</p>
+<p><strong>Mom</strong>: "Oh, but I'll never remember how to do that."</p></blockquote>
+<p>Copying and pasting isn't hard, and it's definitely not beyond her ability to learn or remember.  She knows all sorts of stuff that's a lot more technical than that, but she decided before I even told her how to do it that it was too hard for her.  I think the problem is akin to <a href="http://en.wikipedia.org/wiki/Learned_helplessness">learned helplessness</a>--it's not that she can't learn to do it herself or that she can't remember, but that she believes that any effort on her part is useless, she'll never be smart enough to learn to use this computer thing.</p>
+<p>The interesting thing is that she knows more than she thinks she does, she can figure some things out on her own.  She had already managed to send herself a password reset email, but was helpless to find the link or even navigate her mail client (which was one I'd never used before) without my help the moment I was looking over her shoulder.  In retrospect, it seems sort of defensive--getting my help on things she could probably do to prevent real criticism when she makes a real mistake, or in other words, pretending to be stupid so I don't think her actual ability is stupid.  The upshot is that even if you could get someone like her into a usability study (protesting all the while that you couldn't possibly want her, she doesn't know anything about computers!) you probably wouldn't ever get real behavior.</p>
+<p>So how do you design for someone who doesn't believe they're smart enough to use your system?  The trick is <strong>adding a sense of empowerment and taking out the disempowering elements</strong> (without disempowering more skilled users), but what does that mean?  I don't really know the answer to that, but it's an interesting lens through which to try to view a design.  Let's take a look at the Facebook password reset process.  I'm not picking on Facebook, here, it's just what Mom happened to need help with but it could be any website.</p>
+<h2>Step 1: Sending the password reset email</h2>
+<p><%= image_tag "2009/11/reset_1.jpg", { :alt => "Facebook's password reset form" } %></p>
+<p>The page you get to when you click on the "forgot your password" link is pretty cluttered.  What do you look at first here?  As someone experienced with the web, I know a captcha when I see one and I know what it's used for, but <strong>it's the biggest, boldest thing on the page and it doesn't make any sense</strong>.  It looks techy, as my mom would put it.  Sure, it prevents robots from resetting people's passwords for them, but there are <a href="http://nedbatchelder.com/text/stopbots.html">other ways to do that</a>.</p>
+<p>If you must use a captcha, there are better ways to present them, ways that <strong>don't detract from the two things that actually matter on this page</strong>--the description that says enter your email address to get a reset link and the field where you enter your email address, now currently separated by the big block of nonsense.  Hiding the captcha until after the critical text is entered and then displaying it with an animated transition and friendly explanatory text that this is here to stop the naughty robots would be a good move, too.</p>
+<p>Most users will figure out what to do here from having seen this sort of process elsewhere before, but for someone who doesn't know the pattern you should emphasize the one simple thing they need to do here.  All we need is your email address and maybe a few nonsense words.  There, wasn't that easy?  Let's move on to the next step.</p>
+<h2>Steps 2 &amp; 3: The password reset confirmation page and the email</h2>
+<p><%= image_tag "2009/11/reset_2.jpg", { :alt => "The Facebook password reset confirmation page" } %></p>
+<p><%= image_tag "2009/11/reset_3.jpg", { :alt => "The password reset email" } %></p>
+<p>After you submit the password reset page, you get a confirmation page telling you that an email has been sent and asking you to enter a code from the email into the box.  Honestly, I think you could remove almost all the text from this page without losing anything--the wall of text is intimidating and unnecessary.  <strong>The thing that matters is that you should go check your email</strong>.  Users who are still having trouble can click to open up suggestions.</p>
+<p>Mom was confused by the confirmation code thing, and really I can't see why it exists.  It's completely redundant with the link that is also sent in the email.  It's easier for anyone to click on the link (how many email clients don't support them these days?), and just as easy to copy and paste for those users who now how.  Mom doesn't know how to copy and paste text, and she was confused about what to use as the code, anyway, and whether she still needed it when she clicked the link, but she knows exactly what to do with a link if you just tell her to click it and nothing else.  The link is simple enough to understand.  The code adds "techy" stuff that has to be written down and remembered, and I really don't see the benefit of providing multiple redundant methods of setting a password.</p>
+<h2>Step 4: Changing the password</h2>
+<p><%= image_tag "2009/11/reset_4.jpg", { :alt => "The password reset page" } %></p>
+<p>Mom liked this page.  She approved of the "Passwords match" checker telling her that she got it right before she submitted the form.  She didn't understand the password strength thing, and I don't think she even noticed the question mark next to the field, which just looks like a question mark, not a link or other item that could be acted on.  I told her to ignore the strength meter, no one is going to try to steal her facebook account and remembering a harder password for someone who is already concerned about remembering technical things is <a href="http://research.microsoft.com/en-us/um/people/cormac/papers/2009/solongandnothanks.pdf">not worth the effort</a>.  (I also told her it's ok to write it down and stick it on the monitor.)  I have no idea how to incorporate that into a design heuristic--explaining the password strength would incorporate dire warnings about stolen accounts, but <strong>how do you know when it's better to ignore the advice</strong>?</p>
+<h2>Conclusions, such as they are</h2>
+<p>I don't really have any ground-breaking conclusions to draw from this, mostly it's an interesting thought experiment.  Anything I can say is just good design advice:</p>
+<ul>
+<li>remove all unnecessary content (this includes alternative methods of doing something, except perhaps on pages meant for experts)</li>
+<li>emphasize the important things (happens naturally if you remove unnecessary things)</li>
+<li>don't separate items that need acting on from their explanations</li>
+<li>remove jargon and other techy sounding things when they aren't necessary</li>
+<li>when techy things like captchas are necessary, make them friendly and non-threatening, and hide them until necessary</li>
+<li>"?" doesn't make a good help icon unless you make it look like a button</li>
+<li>feedback as you progress is a good thing</li>
+<li>advice you give to some users will be bad for others</li>
+</ul>

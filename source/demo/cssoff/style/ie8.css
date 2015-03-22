@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* CSS Document */
+
+section.text .text_body:after {
+	content:url('../images/line-shadow.png');
+	position: absolute;
+	left: -17px;
+	bottom: 25px
+}

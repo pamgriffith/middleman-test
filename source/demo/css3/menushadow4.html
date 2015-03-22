@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Tabs with a hover state and :before pseudo-elements</title>
+<script>document.createElement('header');document.createElement('nav');</script>
+<script>if (typeof(parent) != 'undefined' && typeof(parent.demo_popup) != 'undefined' && typeof(parent.demo_popup.get_description) != 'undefined') parent.demo_popup.get_description('css3');</script>
+<style>
+html, body { margin: 0; padding: 0; }
+header { display: block; width: 100%; height: 100px; background-color: #FFC; box-shadow: 0 0 10px rgba(0,0,0,.5); -moz-box-shadow: 0 0 10px rgba(0,0,0,.5); -webkit-box-shadow: 0 0 10px rgba(0,0,0,.5); }
+
+nav { display: block; position: absolute; top: 100px; left: 0; width: 100%; overflow: hidden; padding-bottom: 10px; }
+nav ul { margin: 0; padding: 0; list-style: none; }
+nav ul li { margin: -10px 5px 0 5px; padding: 10px 5px 5px; float: left; background-color: #F5F5BA; border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; box-shadow: 0 0 6px rgba(0,0,0,.5); -moz-box-shadow: 0 0 6px rgba(0,0,0,.5); -webkit-box-shadow: 0 0 6px rgba(0,0,0,.5); position: relative; cursor: pointer; }
+nav ul li:before { content: ' '; height:1px; width: 100%; position: absolute; left: 0; top: 9px; box-shadow:0 0 4px rgba(0, 0, 0, 1); -moz-box-shadow:0 0 4px rgba(0, 0, 0, 1); -webkit-box-shadow:0 0 4px rgba(0, 0, 0, 1); }
+nav ul li:hover { padding-top: 15px; background-color: #FDEBB3; }
+
+.description { display: block; padding: 20px; font-size: larger; }
+</style>
+</head>
+
+<body>
+
+<header>
+	<span class="description">Tabs with a hover state and :before pseudo-elements</span>
+	<nav>
+		<ul>
+			<li>oranges</li>
+			<li>strawberries</li>
+			<li>grapes</li>
+			<li>lemons</li>
+		</ul>
+	</nav>
+</header>
+
+</body>
+</html>

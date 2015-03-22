@@ -1,0 +1,124 @@
+---
+title: Thoughts on all this vendor prefix nonsense
+category: Code
+tags:
+- CSS
+comments:
+- id: 6986
+  author: Boris
+  author_email: bz@mit.edu
+  author_url: ''
+  date: !binary |-
+    MjAxMi0wMi0xMCAxNTozOTo0MyAtMDUwMA==
+  date_gmt: !binary |-
+    MjAxMi0wMi0xMCAyMzozOTo0MyAtMDUwMA==
+  content: ! "The vast majority of webkit-only sites are specifically mobile-targeted.
+    \ For example, the mobile version of gmail uses webkit-specific CSS all over and
+    breaks in non-WebKit browsers, last I checked.  Is that sufficiently mass-market?
+    \ Similar for other Google websites, as well as many other mass-market mobile
+    sites.\r\n\r\nThe problem with the way -webkit prefixes are used on mobile is
+    twofold:\r\n\r\n1)  In some cases the properties _are_ available in other browsers
+    but the site is simply not using them;; they only list the -webkit version.  And
+    since they're using them for fundamental layout, not progressive enhancement,
+    the page breaks.  Think using transforms instead of absolute positioning to position
+    everything on the page, but only using transforms with the -webkit prefix.\r\n\r\n2)
+    \ There are some webkit-only properties (e.g. -webkit-text-size-adjust) that are
+    not only not on the standards track but that Apple is explicitly refusing to submit
+    for standardization.  Presumably this is because Apple has patents covering the
+    implementation, and standardization would mean they would have to disclose and
+    license those patents... and they don't want to."
+- id: 6988
+  author: Pam Griffith
+  author_email: pam@pamgriffith.net
+  author_url: http://www.pamgriffith.net
+  date: !binary |-
+    MjAxMi0wMi0xMCAxNTo1Njo1NyAtMDUwMA==
+  date_gmt: !binary |-
+    MjAxMi0wMi0xMCAyMzo1Njo1NyAtMDUwMA==
+  content: ! "Regarding 1, I'm pretty ok with the notion that if your site is coded
+    to only work in one browser despite other options being available you shouldn't
+    expect it to work in other browsers. Who, for instance, is Google targetting with
+    their mobile site? Maybe they don't care about anyone who isn't on Android, and
+    maybe that's ok. Is it really the browser vendor's responsibility to make sites
+    work everywhere if the site's own creator doesn't care about other audiences?\r\n\r\nFor
+    2, that's fair, but does it need to be Apple that submits it? Is there some other
+    way to submit a proposal that gets at the same goals the developers have when
+    using -webkit-text-size-adjust?"
+- id: 6991
+  author: Pam Griffith
+  author_email: pam@pamgriffith.net
+  author_url: http://www.pamgriffith.net
+  date: !binary |-
+    MjAxMi0wMi0xMCAxNjowOToyOCAtMDUwMA==
+  date_gmt: !binary |-
+    MjAxMi0wMi0xMSAwMDowOToyOCAtMDUwMA==
+  content: Also, after trying gmail in opera mini, it's uglier than in mobile safari
+    but I certainly wouldn't call it broken. I mean actually not functional.
+- id: 6994
+  author: Boris
+  author_email: bz@mit.edu
+  author_url: ''
+  date: !binary |-
+    MjAxMi0wMi0xMCAxODoyODoxNSAtMDUwMA==
+  date_gmt: !binary |-
+    MjAxMi0wMi0xMSAwMjoyODoxNSAtMDUwMA==
+  content: ! "Pam, there are non-WebKit browsers available on Android, but of course
+    the whole point is that people are writing sites just targeting the default Android
+    browser and Mobile Safari.  That's the whole problem!\r\n\r\nIt really is the
+    browser vendor's responsibility to make gmail and the like work in their browser
+    if they want to have any users for the browser.  That's why the browser vendors
+    involved are going to make it work....  The bar here, by the way, is \"broken
+    enough that users won't use your browser\", which can include sufficiently ugly,
+    not merely nonfunctional.\r\n\r\nAs far as #2, the whole point of not submitting
+    due to patents is that if anyone else does submit a proposal that would be covered
+    by the patents (which might well be anything that behaves in similar ways depending
+    on the patents) Apple can effectively axe it by refusing to license the patents.
+    \ Note that Apple would need to disclose the patents at that time; so far they
+    don't even have to do that, so it's hard to say precisely what these patents cover.\r\n\r\nSo
+    the simplest scenario is that someone submits a proposal for standardization;
+    various companies and the working group spend a while working on the spec and
+    implementations and at the 11th hour Apple discloses its patents and says the
+    standard needs to go back to the drawing board and be redesigned to avoid the
+    patents, assuming that's even possible).  This is exactly what Apple did with
+    the attempt to standardize touch events, setting it back by a year or more...
+    \ Given that, why would someone bother investing all that effort?"
+- id: 7059
+  author: Pam Griffith
+  author_email: pam@pamgriffith.net
+  author_url: http://www.pamgriffith.net
+  date: !binary |-
+    MjAxMi0wMi0xNCAxMDowNTo1NCAtMDUwMA==
+  date_gmt: !binary |-
+    MjAxMi0wMi0xNCAxODowNTo1NCAtMDUwMA==
+  content: ! "All of this is a bit far afield from the original point of the post,
+    which was mostly to say what I personally get out of the vendor prefixes. I am
+    not married to them as an ideal solution to all problems, but if there is an alternative
+    I'd be happiest if those were addressed. I'd like to be able to say, maybe, that
+    when I say \"-webkit\" I really do actually mean webkit and other browsers shouldn't
+    pick those properties up.\r\n\r\nYes, I know that the problem is people are targetting
+    the default browsers, and that there are other browsers available. And after trying
+    various things on Opera Mini for a couple of days, I would say that no, Google
+    products are not broken enough that I wouldn't use a non-webkit browser. They've
+    actually done a quite nice job of graceful degradation/progressive enhancement.
+    In fact, some things are actually a bit better: the fancy things add just a bit
+    of lag that makes the apps a bit unpleasant, non-webkit version doesn't have that
+    problem.\r\n\r\nI can't speak for Firefox on Android, but I've tried to love Opera
+    on iOS and just couldn't. It's not nice to use. Even if it rendered things exactly
+    the same as webkit (which, frankly, last I checked it's missing quite a few things
+    that *are* standard, like line height), I still wouldn't use it. I'd be willing
+    to put up with quite a bit more from firefox for other features like syncing,
+    but it's hard to seriously use it without borrowing someone else's phone for a
+    few days.\r\n\r\nIt's a shame about the patents, but it seems like the same problem
+    would happen if the webkit prefixed version were implemented instead? Or the standard
+    doesn't need to be the same as webkit, just address the same problem? I don't
+    know patent law, though. But we've been down this road before, with one vendor
+    implementing something and everyone else scrambling to follow."
+---
+<p>So, if you haven't heard, some web browser vendors are considering adopting -webkit- css prefixes because a whole lot of developers have been writing css that only uses the webkit prefixed versions of some of the new css3 properties. <a href="http://www.brucelawson.co.uk/2012/on-the-vendor-prefixes-problem/">Bruce Lawson</a> has a nice longer summary of what's been going on, if you want it. Frankly I haven't been paying a huge amount of attention because it all seems so silly (haven't we been down this road before? IE6 was the <strong>good</strong> browser...), but I've been informed that my point of view is an unusual position that no one else has been taking, and that I should blog about this. This probably means that no one agrees with me, but anyway.</p>
+<p>The thing is, after several years of using new css3 properties, I kind of like vendor prefixes for several reasons:</p>
+<ul>
+<li>They're a big red flag that says that this property, in particular, is not stable or finished, and is subject to change (see, for example, the gradient property, which has changed quite a few times over the past couple of years). I should use it with caution, pay attention to future changes in the spec, and be prepared to update my code. I have limited amounts of attention, so it's nice to know right when I'm using them which ones in particular might break.</li>
+<li>They let me turn things off for particular browsers. Webkit implements things early so you can play, but it's often <a href="<%= post_url('HTML5, CSS3, and the Great CSS-Off') %>">sloppy</a> and doesn't always address all the edge cases right away. Usually when something makes it into firefox it's got all of the common uses covered. I have, in production code, intentionally put in the -moz- and un-prefixed version of a css property and left the -webkit- version out. I can still do this, since it's the webkit version that may get implemented in other browsers, but imagine if it were the other way. I like being able to separate one browser from another when it comes to the new experimental properties.</li>
+</ul>
+<p>Now, I will grant you that using the prefixes is annoying and harder to read and maintain, but as someone who has made sites work with the IE peekaboo bug and other nasties, it really isn't that hard. Annoying, but really not that bad. And I don't compile my css, but I hear there are tools that will automatically prefix for you. For me, the potential benefits outweigh the difficulty.</p>
+<p>And I do honestly wonder how many actual production websites are ruined in non-webkit browsers because the developer only used -webkit- prefixes. I've seen all sorts of webkit-only demo sites that could in fact work in other browsers if the developer had made the extra effort, but I don't think tech demo sites should really count. What are the broken mass-market websites? And what is broken, and why? If there are properties that are only available in webkit that are necessary for a site to function, perhaps the better answer would be to fast-track those properties into the spec?</p>

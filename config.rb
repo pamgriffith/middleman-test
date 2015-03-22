@@ -40,10 +40,12 @@ activate :blog do |blog|
 end
 
 page "blog/*", :layout => :post
-page "blog/category/*", :layout => :layout
-page "blog/tag/*", :layout => :layout
-page "blog/archive/*", :layout => :layout
+page "blog/category/*", :layout => :base
+page "blog/tag/*", :layout => :base
+page "blog/archive/*", :layout => :base
 page "blog/feed.xml", layout: false
+
+page "demo/*", :directory_index => false, layout: false
 
 ###
 # Compass
@@ -99,6 +101,21 @@ set :js_dir, 'assets/js'
 set :fonts_dir, 'assets/fonts'
 
 set :images_dir, 'uploads'
+
+
+activate :syntax
+
+
+helpers do
+  # Helper method to get a blog post by name
+  # From https://forum.middlemanapp.com/t/link-to-article-by-name/1467/6
+  def post_url(article_title)
+    blog.articles.find { |article| article.title.downcase == article_title.downcase }.url
+    rescue
+    ""
+  end
+end
+
 
 # Build-specific configuration
 configure :build do

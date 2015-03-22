@@ -1,0 +1,13 @@
+---
+title: Privacy and autocompleted usernames
+category: Design Critique
+tags:
+- Privacy
+comments: []
+---
+<p>I dislike sites having access to information (e.g. from a social network) that I haven't explicitly said they could have. I also get peeved at sites like Quora being very pushy about getting me to log in, in particular with said social networks, presumably so they can track what I, as a particular individual, am interested in, in addition to anonymized stats.</p>
+<p>So given that, I was kind of annoyed earlier today when I discovered my twitter avatar appeared next to the login box on the top of a Quora post.</p>
+<p><%= image_tag "2013/07/quora-login.png", { :alt => "Quora login showing my twitter avatar" } %></a></p>
+<p>I had third-party cookies disabled and it's not in an iframe, so they weren't getting it from facebook, and it was still there after deleting all (39!) cookies from the domain... So how did they know that?</p>
+<p>It turns out removing the username and password autocomplete for Quora also removed the avatar. Filling in the email field again put it back. The site was able to detect the autocompleted username and potentially figure out who I was and what pages I visited even though I wasn't logged in--I doubt there was any intent to collect the autocompleted name, just a cute embellishment when someone intentionally fills out their name as an extra indication of who they are logging in as, but there it is.</p>
+<p>When I browse sites while logged out I generally assume that they don't know 100% exactly who I am--there are things they can do to correlate IP address and even browser, OS, plugins, etc., but there's work involved and it's not bulletproof. But when my browser auto-fills a username, it's telling the site exactly who I am--I could screw with that, of course, by putting in someone else's email address, so it's still not 100%, but still, I'd just rather they didn't get that information at all...</p>
