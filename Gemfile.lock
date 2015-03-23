@@ -31,6 +31,7 @@ GEM
     erubis (2.7.0)
     execjs (2.4.0)
     ffi (1.9.8)
+    ffi (1.9.8-x64-mingw32)
     haml (4.0.6)
       tilt
     hike (1.2.3)
@@ -112,6 +113,8 @@ GEM
       hitimes
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    tzinfo-data (1.2015.2)
+      tzinfo (>= 1.0.0)
     uber (0.0.13)
     uglifier (2.7.1)
       execjs (>= 0.3.0)
@@ -119,9 +122,11 @@ GEM
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   builder (~> 3.0)
   middleman (~> 3.3.10)
   middleman-blog (~> 3.5.3)
   middleman-syntax
+  tzinfo-data

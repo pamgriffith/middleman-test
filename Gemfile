@@ -10,3 +10,5 @@ gem "middleman-syntax"
 
 # For feed.xml.builder
 gem "builder", "~> 3.0"
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
