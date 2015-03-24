@@ -1,0 +1,174 @@
+---
+title: Guild Hall
+---
+<p>This was a class project with <a href="http://www.linkedin.com/in/gretchenortiz">Gretchen Ortiz</a> and <a href="http://www.linkedin.com/in/sarahestherwilliams">Sarah Williams</a> for the <a href="http://www.cc.gatech.edu/classes/AY2007/cs6470_spring/">Online Communities</a> class at Georgia Tech. The goal was to research an online community of some sort and create a design that would improve on it. We designed and made a <a href="<%= data.meta.baseurl %>/demo/guildhall">rough wireframe</a> of an interface that would help people find guilds in a Massively Multiplayer Online Role Playing Game.</p>
+
+<p>This post is pretty long, so here's an interactive wireframe for those who want to skip ahead:</p>
+
+<p style="text-align: center;"><a class="demo-popup-link demo-popup-id-guildhall download_button" href="<%= data.meta.baseurl %>/demo/guildhall/">Interactive Demo</a></p>
+
+<h2>Project Background</h2>
+
+<p>Our chosen community was <a href="http://maplestory.nexon.net">Maple Story</a>, a cartoony, 2d <abbr title="Massively Multiplayer Online Role-Playing Game">MMORPG</abbr>. There are multiple versions for different parts of the world (the Asian versions being the most popular by far); in the American version, which is what we looked at, it seems to be most popular with a young audience, particularly tweens and teens.</p>
+
+<p>We conducted several weeks of <a href="http://en.wikipedia.org/wiki/Participant_observation">participant observation</a> and interviewed a number of the players and uncovered some features of the community that we wanted to foster:</p>
+
+<ul>
+	<li><strong>Players are very social</strong>--more so, according to the players, than in other similar games (e.g. World of Warcraft, Everquest). Participants reported spending a lot of time just hanging out and chatting, or other non-game-related activities like racing each other across the world.</li>
+	<li>Many of those<strong> social interactions occur within guilds</strong>, and large guilds often host events for their members to foster that interaction</li>
+</ul>
+
+<p>We also encountered two big problems that were harming the community:</p>
+
+<ul>
+	<li><strong>"Hacking"</strong>--many players download and run scripts that allow them to kill monsters automatically, gaining items and experience faster than otherwise possible. Use of these scripts is not only unfair, it makes the zones where the scripter's avatar is located unplayable and dangerous.</li>
+	<li>Guilds are very important for enjoyment of the game, but<strong> it's difficult for players to find other like-minded people</strong> that they would want to hang out with and for guild leaders to manage their guilds. Many guilds have their own websites (GuildFire (now closed) and <a href="http://www.profil3.com/">Profil3</a> were popular hosts at the time)</li>
+</ul>
+
+<p>We decided to solve the guild-finding problem because potential solutions to the hacking problem seemed like they would be mostly technical; Nexon of course regularly releases patches to prevent hacking, but they could also do something more drastic like remove certain things from the client entirely and place them on the server (I had my doubts about the feasibility of that at the time, but after working at Metaplace I think it's entirely possible). It could also be that the hacking problem actually brings people together, and by removing the problem we would leave people with nothing to talk about. They could also reduce incentives by fixing the monster level curve so hacking is less "necessary". There are already social pressures, like anti-hacking watch groups and "I'm legit" website badges set up by players.</p>
+
+<h2>Requirements</h2>
+
+<p>The guild interface needed to be able to do the following:</p>
+
+<ul>
+	<li>Allow guilds to find members of the right level range, interests, etc. who are looking for a guild</li>
+	<li>Allow players to find a guild that looks worth joining</li>
+</ul>
+
+<p>This interface could either be within the game or a separate, unaffiliated website. There are already several external websites that allow guilds to have profiles and forums, but they're not really focused around recruiting and they're not helpful for players who don't know about them or are only on one but not the others. An official, consolidated, in-game interface seemed like the better option.</p>
+
+<p>The downside of an official interface is that only officially-sanctioned things would be allowed. That means that that hackers looking for a hacker guild would be out of luck, but they would be no worse off than before and we figured the majority of players would be ok with not helping the hackers out there.</p>
+
+<p>An in-game interface would need to match the rest of the Maple Story interface. That means</p>
+
+<ul>
+	<li>Low resolution</li>
+	<li>Bubbly buttons and bright colors</li>
+	<li>Highly graphical</li>
+</ul>
+
+<p>A couple of additional considerations we kept in mind:</p>
+
+<ul>
+	<li>Avatar images are very important for individual identity</li>
+	<li>Events and event screenshots are very important for guild identity</li>
+	<li>Guilds often have strict codes of conduct and member requirements, and often will not recruit new members unless that person has hung out with the group a bunch (we referred to these peoples as "groupies")</li>
+</ul>
+
+<h2>Interface Wireframe</h2>
+
+<p>This is a rough, early stage wireframe of what the interface might be like. Sizes/positions would likely shift around in higher-fidelity versions as it becomes more clear what will actually fit in the allowed space.</p>
+
+<h3 id="index">Front page</h3>
+
+<figure>
+	<%= image_tag "2010/03/index.gif", { :alt => "Front Page" } %>
+	<figcaption>Players see this page when they open the guild hall interface</figcaption>
+</figure>
+
+<p>The main interface features a MapleStory/Guild Hall logo, the avatar and guild logo of the player's currently selected character (players may have more than one character on multiple servers, this serves as a reminder of which one the player is using), and buttons to navigate the interface and return to the game.</p>
+
+<p>The goal of the front page is to give the user an <strong>overview of what prominent active guilds are doing</strong>. For an individual, it would give an idea of what guilds might be interesting to join or hang out with. For guild leaders, it would give an ideas for things that his or her guild could do.</p>
+
+<p>The front page will show guild events, including an event that staff chooses to highlight, and featured guilds. The guild rankings already exist, but "guild of the month" and guild events in general would be new features. "Guild of the Month" would be some sort of rotating spotlight of a guild chosen by staff members as somehow prominent or interesting. The choice would be up to staff (or perhaps voter?) discretion.</p>
+
+<p>Guild events are not currently tracked by anything within Maple Story, but they do occur frequently, sometimes with a lot of planning ahead. Guild leaders would have a page in the "Your guild" section to create or edit their guild's events.</p>
+
+<h3 id="Guild-Profile-Description">Guild profile</h3>
+
+<figure>
+	<%= image_tag "2010/03/Guild-Profile-Description.gif", { :alt => "Guild Profile Description" } %>
+	<figcaption>Front page of a guild's profile with description, recruiting status, affiliations, and leaders</figcaption>
+</figure>
+
+<p>Guild profiles include multiple pages for description, roster, events, a forum for current members, and an application form for non-members. All subpages include the tabs and the mini profile on the right with the guild name and logo, member of the month (a rotating spotlight member chosen by guild leaders), a short list of upcoming events, and establishment and recent activity dates. Most of these features came from our overview of guild-created profile sites, which featured these things prominently.</p>
+
+<p>The mini profile allows the guild name and logo to be visible on all subpages of the guild profile and makes the rotating member spotlight very prominent, which could be a nice ego boost for members working hard for their guilds. The brief upcoming events listing provides a quick overview of what the guild is doing and perhaps it and other event listings could even link to the place in the world where the event is happening. The dates provide a pedigree for the guild and show if it's been active lately.</p>
+
+<p><strong>The description page is mostly for players interested in joining</strong>. It's a place for the guild to say what they're all about, whether or not they're looking for new members, and where interested players should go if they want to hang out with the guild. It also has a place for affiliated guilds, which are often arms of a larger meta-guild or otherwise have similar ideologies and work together. Even if the guild isn't recruiting, affiliated guilds may be. Affiliated guilds are not currently an official feature, but many guilds form these alliances and list them on external profiles.</p>
+
+<p>The description page also has a list of the guild leaders that might be useful to both members and non-members, especially if it tied into the existing in-game message system.</p>
+
+<p>Guild leaders would see a button on this page to edit the guild description, official meeting place, recruiting status, and maybe affiliated guilds and member of the month. Member of the month could also be set and displayed on the roster page.</p>
+
+<h3 id="Guild-Profile-Roster">Guild roster</h3>
+
+<figure>
+	<%= image_tag "2010/03/Guild-Profile-Roster.gif", { :alt => "Guild Profile Roster" } %>
+	<figcaption>The guild roster shows a list of characters in the guild with their avatars, guild ranking, and character occupation</figcaption>
+</figure>
+
+<p>The guild roster is another feature that came straight from user-created guild profiles. Members are proud of their guild affiliation and want to show it off, and potential new members may want to see who is in the guild, how big it is, their levels, etc.</p>
+
+<p>This page could potentially tie in with other in-game member management features that guild leaders have access to. Ideally the whole Guild Hall interface with integrate very well with existing guild management and membership features.</p>
+
+<h3 id="Guild-Profile-Events">Guild events</h3>
+
+<figure>
+	<%= image_tag "2010/03/Guild-Profile-Events.gif", { :alt => "Guild Profile Events" } %>
+	<figcaption>The guild's upcoming events and logs of previous events</figcaption>
+</figure>
+
+<p>We found that <strong>events that guilds organized were important for group-building and identity</strong>. Many guilds liked keeping journals with screenshots of past parties, epic quests, group avatar makeovers, etc. This page allows guilds to promote their upcoming events to their members and optionally to non-members who want to hang out with the guild, and to log previous events so everyone can see the cool things they've been up to. Potential new members would be able to see how active the guild is, if they do fun things, and potentially find and hang out with the guild.</p>
+
+<p>Events that are happening at the moment the page is viewed could potentially have a "Join Event" button that would take the player to the event location. However, this would require in-world teleportation, which might not be ok with the game developers. Alternatively, there could just be a "This event is happening now!" indicator and the player would be required to get there by some other means.</p>
+
+<p>Guild leaders would be able to add events, edit them, and write up descriptions of them with screenshots. Upcoming event listings could be created so everyone could see them, members only, or perhaps even only a subset like the leaders.</p>
+
+<h3 id="Guild-Profile-Forum">Guild forum</h3>
+
+<p>Guild forums aren't an essential feature for an interface that matches players to guilds, and we did not create a wireframe for it. But most large guilds seem to have them, and if we're creating a comprehensive guild interface this would be the place for it.</p>
+
+<p>For the most part guild forums are for internal communication and discussion. They often feature multiple message boards on different topics, some of which are visible only to guild leaders for internal management discussions. Sometimes they are shared between affiliated guilds or branches of the same guild on different servers.</p>
+
+<p>This tab might be available for non-members too; many very large guilds often have open forums for potential recruits to ask questions and chat with members.</p>
+
+<h3 id="Guild-Profile-Join">Join</h3>
+
+<figure>
+	<%= image_tag "2010/03/Guild-Profile-Join.gif", { :alt => "Guild Profile Join" } %>
+	<figcaption>Recruitment form with the guild member requirements and code of conduct and questions chosen by the guild</figcaption>
+</figure>
+
+<p>This tab would be visible only to non members and for guild leaders to edit the recruitment questions. Many guilds have stringent participation requirements and strictly enforced codes of conduct, and those appear here. They might also appear on the guild description.</p>
+
+<p>Guilds seem to vary pretty widely in what they want to know about new members, so adding and changing questions should be completely open to the guild. Probably not all guilds will want to customize this, so there could be a default question like "Why do you want to join our guild?"</p>
+
+<h3 id="Guild-Search">Guild search</h3>
+
+<figure>
+	<%= image_tag "2010/03/Guild-Search.gif", { :alt => "Guild Search" } %>
+	<figcaption>The search interface for players to find guilds</figcaption>
+</figure>
+
+<p>We took some inspiration for this page from the <a href="http://everquest2.station.sony.com/guilds/guild_search.vm?mode=Default">Everquest II guild search</a> in addition to our interviews. Players can search guild names and descriptions for keywords and find guilds based on size and level and recruiting status. The name, level, recruitment status, modification date, and class distribution would be shown in a list below.</p>
+
+<p>As with the profiles, the last modified date would indicate if the guild were still active. Guilds often recruit by level, so showing average level or level range might indicate if it's a beginner or advanced-player guild or something more well-rounded.</p>
+
+<p>Class distribution would have a diagram that would show if the guild is heavy in one sort of character. We also thought about asking players what they consider themselves to be based on <a href="http://www.mud.co.uk/richard/hcds.htm">Richard Bartle's player types</a>; this chart could also show a distribution of types to indicate if the guild is primarily social or more goal oriented. The diagram could also appear on the guild's profile page.</p>
+
+<p>Clicking a row in the results would take the player to that guild's profile. There would need to be some method to get back to the search results from there, but we have not decided the best place for such a button; perhaps clicking "Guild Search" again would take the player back to the previous search rather than starting over.</p>
+
+<h3 id="Recruit-Search">Recruit search</h3>
+
+<figure>
+	<%= image_tag "2010/03/Recruit-Search.gif", { :alt => "Recruit Search" } %>
+	<figcaption>The search interface for guilds to find new members</figcaption>
+</figure>
+
+<p>The recruit search page is similar to the guild search page. Guild recruiters can search for players based on name or keywords in their descriptions about themselves, level, character class (e.g. magician, rogue), and <a href="http://http://www.mud.co.uk/richard/hcds.htm">player type</a>. The players' names and other attributes as well as date created and an invite button appear in a list when the form is submitted.</p>
+
+<p>Guilds frequently recruit based on class and level to help with group quests. We added player type because some Maple Story guilds are very social, others are very directed. A guild full of achievers might not want a social player, and the social player might not have any fun in a guild of achievers.</p>
+
+<p>Character creation date can indicate inactivity or hacking: a low level character that was created a long time go probably doesn't get played much, and a high level character that was just created might be cheating. These are both aspects that many guilds care very much about.</p>
+
+<p>The invite button allows guilds to quickly invite a large number of people. Some guild recruiters currently stand around crowded areas and invite everyone who comes by with the desired level and class, since not everyone will be interested in joining. This button provides a similar but more convenient functionality, but it may not be as desirable or necessary with the rest of the Guild Hall interface.</p>
+
+<h3 id="Add-Recruit-Profile">Recruit profiles</h3>
+
+<p>There isn't a mock up of a recruit profile because we needed more research to figure out what else guilds are interested in knowing about new members that a profile might tell them. Certainly it would include the character's name, level, class, avatar, player type, creation date, and last login for the reasons described in the guild search section.</p>
+
+<p>There might also be a more open profile component, but it should be more directed than "Say something about yourself" since many things that might answer that question are irrelevant and possibly even dangerous--many of the players are around 12 years old and from our in-game experiences seem willing to give strangers any information they ask for, including phone numbers. (I tell you, there is nothing that will make you feel like a creep like wandering around a virtual world asking kids for their phone numbers so you can interview them.)</p>
+
+<p>The questions should probably <strong>retain an open answer format to allow personality to show through</strong>, but might be more directed like "What do you like to do in Maple Story?" or "What's your favorite thing about your character class?"</p>

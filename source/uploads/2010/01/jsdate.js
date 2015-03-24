@@ -226,7 +226,7 @@ Date.prototype.format = function (formatstr) {
 		, c: function () {
 			return dateObj.format('Y-m-d\TH:i:sP');
 		}
-		// r 	» RFC 2822 formatted date 	Example: Thu, 21 Dec 2000 16:01:07 +0200
+		// r 	RFC 2822 formatted date 	Example: Thu, 21 Dec 2000 16:01:07 +0200
 		, r: function () {
 			return dateObj.format('D, d M Y H:i:s O');
 		}

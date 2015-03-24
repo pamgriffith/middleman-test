@@ -1,0 +1,81 @@
+<?php
+$to_email = '<%= data.meta.email %>';
+$is_post = false;
+$is_sent = false;
+$has_errors = false;
+$errors = array(
+	'form' => false,
+	'name' => false,
+	'email' => false,
+	'message' => false
+);
+if (count($_POST)) {
+	$is_post = true;
+	if (!array_key_exists('name', $_POST) || $_POST['name'] == '') {
+		$errors['name'] = 'Please enter your name.';
+		$has_errors = true;
+	}
+	if (!array_key_exists('email', $_POST) || $_POST['email'] == '' || !preg_match('/.+@.+/', $_POST['email'])) {
+		$errors['email'] = 'Please enter a valid email address.';
+		$has_errors = true;
+	}
+	if (!array_key_exists('message', $_POST) || $_POST['message'] == '') {
+		$errors['message'] = 'Please enter a message.';
+		$has_errors = true;
+	}
+	if (!$has_errors) {
+		$headers = 'From: ' . $_POST['name'] . '<' . $_POST['email'] . '>' . "\r\n";
+		$headers .='Reply-To: ' . $_POST['name'] . '<' . $_POST['email'] . '>' . "\r\n";
+		$headers .='X-Mailer: PHP/' . phpversion();
+		$headers .= "MIME-Version: 1.0\r\n";
+		$headers .= "Content-type: text/html;\r\n";
+		$is_sent = mail($to_email, 'Contact Form', $_POST['message'], $headers);
+		if (!$is_sent) {
+			$errors['form'] = 'The server is having a problem sending your message, please try again later or email me directly.';
+			$has_errors = true;
+		}
+	}
+}
+?>
+
+<a name="contact-form"></a>
+
+<?php if ($is_sent) { ?>
+
+<p>Thanks, your message has been sent! Expect to hear from me within a couple of days.</p>
+
+<?php } else { ?>
+
+<p>Please feel free to contact me below or at <a href="mailto:<%= data.meta.email %>"><%= data.meta.email %></a> with questions or comments!</p>
+
+<?php if ($errors['form']) { ?><p class="error"><?php echo $errors['form'] ?></p><?php } ?>
+
+<form accept-charset="UTF-8" enctype="multipart/form-data" method="post" action="#contact-form">
+
+	<div class="form-row">
+		<label class="desc" for="name">Name</label>
+		<input id="name" name="name" type="text" value="<?php echo $is_post ? $_POST['name'] : ''; ?>" maxlength="255" required />
+		<?php if ($errors['name']) { ?><span class="error"><?php echo $errors['name'] ?></span><?php } ?>
+	</div>
+	<div class="form-row">
+		<label class="desc" for="email">Email</label>
+		<input id="email" name="email" type="email" spellcheck="false" value="<?php echo $is_post ? $_POST['email'] : ''; ?>" maxlength="255" required />
+		<?php if ($errors['email']) { ?><span class="error"><?php echo $errors['email'] ?></span><?php } ?>
+	</div>
+	<div class="form-row">
+		<label class="desc" for="message">Message</label>
+		<textarea id="message" name="message" spellcheck="true" rows="10" cols="50" required><?php echo $is_post ? $_POST['message'] : ''; ?></textarea>
+		<?php if ($errors['message']) { ?><span class="error"><?php echo $errors['message'] ?></span><?php } ?>
+	</div>
+	<div class="form-row">
+		<button type="submit">Send Message</button>
+	</div>
+
+	<div class="honeypot">
+		<label for="comment">Do Not Fill This Out</label>
+		<textarea name="comment" id="comment" rows="1" cols="1"></textarea>
+	</div>
+
+</form>
+
+<?php } ?>
