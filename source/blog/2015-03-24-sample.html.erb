@@ -1,0 +1,27 @@
+---
+title: Sample blog post
+category: Sample Category
+tags:
+- Sample tag 1
+- Sample tag 2
+comments:
+- id: 229
+  author: Comment Author
+  author_email: ''
+  author_url: ''
+  date: !binary |-
+    MjAxMC0wNC0yMyAwNjowMTowMSAtMDQwMA==
+  date_gmt: !binary |-
+    MjAxMC0wNC0yMyAxMzowMTowMSAtMDQwMA==
+  content: 'here is a sample comment'
+---
+
+<p>This is a sample blog post.</p>
+
+<p><%= image_tag "2012/03/sample.png", { :alt => "An image" } %></p>
+
+<% code("html") do %>
+<h1>Here is some code.</h1>
+<% end %>
+
+<p style="text-align: center;"><a class="demo-popup-link download_button" rel="demo" href="<%= data.meta.baseurl %>/demo/sample/index.html">fake demo</a></p>
